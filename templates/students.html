@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}Leerlingen Overzicht{% endblock %}
+
+{% block content %}
+<main>
+    <h1>Leerlingen Overzicht</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Naam</th>
+                <th>Avatar</th>
+                <th>Acties</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student['name'] }}</td>
+                <td><img src="{{ student['avatar'] }}" alt="{{ student['name'] }}" width="50"></td>
+                <td>
+                    <a href="{{ url_for('admin.edit_student', id=student['id']) }}">Bewerken</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+{% endblock %}

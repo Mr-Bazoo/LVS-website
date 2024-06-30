@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}Welkom{% endblock %}
+
+{% block content %}
+<main>
+    <h1>Welkom bij ons Leerlingvolgsysteem</h1>
+    <p>Selecteer een leerling om hun voortgang te bekijken of bij te werken.</p>
+    
+    <div id="student-list">
+        <!-- Hier komt de lijst met leerlingen, die we met JavaScript zullen vullen -->
+    </div>
+</main>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+{% endblock %}
