@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Leerlingen</h1>
+    <form action="{{ url_for('home') }}" method="get" class="mb-3">
+        <div class="input-group">
+            <input type="text" name="search" class="form-control" placeholder="Zoek leerling..." value="{{ search or '' }}">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit">Zoeken</button>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        {% for leerling in leerlingen.items %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    {% if leerling.afbeelding %}
+                        <img src="{{ leerling.afbeelding }}" class="card-img-top" alt="{{ leerling.naam }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ leerling.naam }}</h5>
+                        <a href="{{ url_for('leerling_detail', leerling_id=leerling.id) }}" class="btn btn-primary">Details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            {% for page in leerlingen.iter_pages() %}
+                {% if page %}
+                    <li class="page-item {{ 'active' if page == leerlingen.page else '' }}">
+                        <a class="page-link" href="{{ url_for('home', page=page, search=search) }}">{{ page }}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled"><span class="page-link">...</span></li>
+                {% endif %}
+            {% endfor %}
